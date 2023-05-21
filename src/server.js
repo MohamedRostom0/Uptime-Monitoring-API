@@ -4,6 +4,9 @@ import router from './router';
 import { config as parseEnvironmentVariables } from 'dotenv';
 import connectToDB from './config/db';
 import { errorHandler } from './middlewares/error-handler';
+import { join, dirname  } from 'path';
+import { fileURLToPath } from 'url';
+
 
 parseEnvironmentVariables();
 connectToDB();
@@ -20,10 +23,14 @@ if (process.env.NODE_ENV === "development") {
 // Mount Router
 app.use(router)
 
-app.get("/", (req, res, next) => {
-    res.send("Hello, World!")
-})
+app.get('/docs', (req, res, next) => {
+    // Get the directory path of the current module
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
 
+    const filePath = join(__dirname, '../documentation.html');
+    res.sendFile(filePath);
+});
 
 app.use(errorHandler);
 

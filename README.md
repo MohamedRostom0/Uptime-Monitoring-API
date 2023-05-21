@@ -72,4 +72,4 @@ Try your best to implement as much as you can from the given requirements and fe
   1. Run `npm test` to run tests
 
 ## Documentation
-- View [Docs](documentation.html) or Open `documentation.html`
+- GET `http://localhost:3000/docs` or Open `documentation.html`
